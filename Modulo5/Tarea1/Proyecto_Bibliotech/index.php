@@ -127,225 +127,292 @@ $libros_por_categoria = $biblioteca->getLibrosPorCategoria();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bibliotech</title>
+    <title>BibliotecaTech | Sistema de Gestión</title>
+    
+    <!-- Librerías CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href=".//css/styles.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-book me-2"></i>
-                Bibliotech
-            </a>
-        </div>
-    </nav>
+    <div class="app-container">
+        <!-- Navbar Profesional -->
+        <nav class="navbar navbar-expand-lg navbar-profesional">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-book"></i>
+                    BibliotecaTech
+                </a>
+            </div>
+        </nav>
 
-    <div class="container mt-4">
-        <!-- Estadísticas -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="stats-card">
-                    <div class="stats-number text-primary"><?php echo $total_libros; ?></div>
-                    <div class="stats-label">Total de Libros</div>
+        <!-- Contenido Principal -->
+        <main class="main-content">
+            <div class="container-fluid">
+                <!-- Estadísticas -->
+                <div class="stats-grid fade-in">
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <div class="stat-number"><?php echo $total_libros; ?></div>
+                                <div class="stat-label">Total de Libros</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <div class="stat-number text-success"><?php echo $libros_disponibles; ?></div>
+                                <div class="stat-label">Disponibles</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <div class="stat-number text-warning"><?php echo $libros_prestados; ?></div>
+                                <div class="stat-label">Prestados</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-hand-holding"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-content">
+                            <div class="stat-info">
+                                <div class="stat-number"><?php echo count($libros_por_categoria); ?></div>
+                                <div class="stat-label">Categorías</div>
+                            </div>
+                            <div class="stat-icon">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card">
-                    <div class="stats-number text-success"><?php echo $libros_disponibles; ?></div>
-                    <div class="stats-label">Disponibles</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card">
-                    <div class="stats-number text-danger"><?php echo $libros_prestados; ?></div>
-                    <div class="stats-label">Prestados</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="stats-card">
-                    <div class="stats-number text-warning"><?php echo count($libros_por_categoria); ?></div>
-                    <div class="stats-label">Categorías</div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Búsqueda -->
-        <div class="search-section">
-            <h4 class="mb-3"><i class="fas fa-search me-2"></i>Buscar Libros</h4>
-            <form method="POST" class="row g-3">
-                <div class="col-md-6">
-                    <input type="text" class="form-control" name="termino_busqueda" placeholder="Ingrese término de búsqueda..." required>
+                <!-- Búsqueda -->
+                <div class="search-section fade-in">
+                    <h3 class="section-title">
+                        <i class="fas fa-search"></i>
+                        Buscar Libros
+                    </h3>
+                    <form method="POST" class="row g-3 form-profesional">
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" name="termino_busqueda" 
+                                   placeholder="Ingrese título, autor, categoría o ISBN..." required>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-select" name="criterio_busqueda">
+                                <option value="titulo">Título</option>
+                                <option value="autor">Autor</option>
+                                <option value="categoria">Categoría</option>
+                                <option value="isbn">ISBN</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="submit" name="buscar" class="btn btn-primary w-100">
+                                <i class="fas fa-search"></i>
+                                Buscar
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-md-4">
-                    <select class="form-select" name="criterio_busqueda">
-                        <option value="titulo">Título</option>
-                        <option value="autor">Autor</option>
-                        <option value="categoria">Categoría</option>
-                        <option value="isbn">ISBN</option>
-                    </select>
-                </div>
-                <div class="col-md-2">
-                    <button type="submit" name="buscar" class="btn btn-primary-custom w-100">
-                        <i class="fas fa-search me-1"></i>Buscar
-                    </button>
-                </div>
-            </form>
-        </div>
 
-        <!-- Resultados de Búsqueda -->
-        <?php if (isset($resultados_busqueda) && !empty($resultados_busqueda)): ?>
-        <div class="card card-custom">
-            <div class="card-header card-header-custom">
-                <h5 class="mb-0">Resultados de Búsqueda (<?php echo count($resultados_busqueda); ?>)</h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Autor</th>
-                                <th>Categoría</th>
-                                <th>ISBN</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($resultados_busqueda as $libro): ?>
-                            <tr>
-                                <td><?php echo $libro->getTitulo(); ?></td>
-                                <td><?php echo $libro->getAutor(); ?></td>
-                                <td><?php echo $libro->getCategoria(); ?></td>
-                                <td><?php echo $libro->getIsbn(); ?></td>
-                                <td>
-                                    <span class="badge <?php echo $libro->getDisponible() ? 'badge-disponible' : 'badge-prestado'; ?>">
-                                        <?php echo $libro->getDisponible() ? 'Disponible' : 'Prestado'; ?>
-                                    </span>
-                                </td>
-                                <td class="book-actions">
-                                    <a href="?editar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-edit">
-                                        <i class="fas fa-edit"></i> Editar
-                                    </a>
-                                    <?php if ($libro->getDisponible()): ?>
-                                        <a href="?prestar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-success">
-                                            <i class="fas fa-hand-holding"></i> Prestar
-                                        </a>
-                                    <?php else: ?>
-                                        <a href="?devolver=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-undo"></i> Devolver
-                                        </a>
-                                    <?php endif; ?>
-                                    <a href="?eliminar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-danger" 
-                                       onclick="return confirm('¿Está seguro de eliminar este libro?')">
-                                        <i class="fas fa-trash"></i> Eliminar
-                                    </a>
-                                </td>
-                            </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <?php elseif (isset($resultados_busqueda) && empty($resultados_busqueda)): ?>
-        <div class="alert alert-warning text-center">
-            <i class="fas fa-exclamation-triangle me-2"></i>No se encontraron resultados para la búsqueda.
-        </div>
-        <?php endif; ?>
-
-        <!-- Formulario para Agregar/Editar Libro -->
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="card card-custom">
-                    <div class="card-header card-header-custom">
-                        <h5 class="mb-0">
-                            <i class="fas <?php echo $modoEdicion ? 'fa-edit' : 'fa-plus-circle'; ?> me-2"></i>
-                            <?php echo $modoEdicion ? 'Editar Libro' : 'Agregar Nuevo Libro'; ?>
+                <!-- Resultados de Búsqueda -->
+                <?php if (isset($resultados_busqueda) && !empty($resultados_busqueda)): ?>
+                <div class="card-profesional fade-in">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <i class="fas fa-search"></i>
+                            Resultados de Búsqueda (<?php echo count($resultados_busqueda); ?>)
                         </h5>
                     </div>
                     <div class="card-body">
-                        <?php 
-                        if ($modoEdicion && $libroEditar) {
-                            echo FormHandler::mostrarFormularioLibro($libroEditar);
-                        } else {
-                            echo FormHandler::mostrarFormularioLibro();
-                        }
-                        ?>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Lista de Libros -->
-            <div class="col-lg-6">
-                <div class="card card-custom">
-                    <div class="card-header card-header-custom">
-                        <h5 class="mb-0">
-                            <i class="fas fa-book me-2"></i>
-                            Catálogo de Libros (<?php echo $total_libros; ?>)
-                        </h5>
-                    </div>
-                    <div class="card-body">
-                        <?php if ($total_libros > 0): ?>
                         <div class="table-responsive">
-                            <table class="table table-hover table-custom">
+                            <table class="table-profesional">
                                 <thead>
                                     <tr>
                                         <th>Título</th>
                                         <th>Autor</th>
                                         <th>Categoría</th>
+                                        <th>ISBN</th>
                                         <th>Estado</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($biblioteca->getLibros() as $libro): ?>
-                                    <tr>
-                                        <td><?php echo $libro->getTitulo(); ?></td>
+                                    <?php foreach ($resultados_busqueda as $libro): ?>
+                                    <tr class="slide-in">
+                                        <td class="fw-bold"><?php echo $libro->getTitulo(); ?></td>
                                         <td><?php echo $libro->getAutor(); ?></td>
-                                        <td><?php echo $libro->getCategoria(); ?></td>
                                         <td>
-                                            <span class="badge <?php echo $libro->getDisponible() ? 'badge-disponible' : 'badge-prestado'; ?>">
-                                                <?php echo $libro->getDisponible() ? 'Disponible' : 'Prestado'; ?>
-                                            </span>
+                                            <span class="badge bg-light text-dark"><?php echo $libro->getCategoria(); ?></span>
                                         </td>
-                                        <td class="book-actions">
-                                            <a href="?editar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-edit" title="Editar">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
+                                        <td class="text-secondary"><?php echo $libro->getIsbn(); ?></td>
+                                        <td>
                                             <?php if ($libro->getDisponible()): ?>
-                                                <a href="?prestar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-success" title="Prestar">
-                                                    <i class="fas fa-hand-holding"></i>
-                                                </a>
+                                                <span class="badge badge-success">
+                                                    <i class="fas fa-check"></i> Disponible
+                                                </span>
                                             <?php else: ?>
-                                                <a href="?devolver=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-warning" title="Devolver">
-                                                    <i class="fas fa-undo"></i>
-                                                </a>
+                                                <span class="badge badge-warning">
+                                                    <i class="fas fa-clock"></i> Prestado
+                                                </span>
                                             <?php endif; ?>
-                                            <a href="?eliminar=<?php echo $libro->getId(); ?>" class="btn btn-sm btn-danger" 
-                                               onclick="return confirm('¿Está seguro de eliminar este libro?')" title="Eliminar">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                        </td>
+                                        <td>
+                                            <div class="acciones-tabla">
+                                                <a href="?editar=<?php echo $libro->getId(); ?>" class="btn btn-outline btn-sm">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <?php if ($libro->getDisponible()): ?>
+                                                    <a href="?prestar=<?php echo $libro->getId(); ?>" class="btn btn-success btn-sm">
+                                                        <i class="fas fa-hand-holding"></i>
+                                                    </a>
+                                                <?php else: ?>
+                                                    <a href="?devolver=<?php echo $libro->getId(); ?>" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-undo"></i>
+                                                    </a>
+                                                <?php endif; ?>
+                                                <a href="?eliminar=<?php echo $libro->getId(); ?>" class="btn btn-danger btn-sm" 
+                                                   onclick="return confirm('¿Está seguro de eliminar este libro?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>
-                        <?php else: ?>
-                        <div class="text-center py-4">
-                            <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
-                            <h5 class="text-muted">No hay libros en el catálogo</h5>
-                            <p class="text-muted">Comienza agregando tu primer libro usando el formulario.</p>
+                    </div>
+                </div>
+                <?php elseif (isset($resultados_busqueda) && empty($resultados_busqueda)): ?>
+                <div class="card-profesional fade-in">
+                    <div class="estado-vacio">
+                        <i class="fas fa-search"></i>
+                        <h5>No se encontraron resultados</h5>
+                        <p>Intenta con otros términos de búsqueda</p>
+                    </div>
+                </div>
+                <?php endif; ?>
+
+                <!-- Contenido Principal -->
+                <div class="grid-principal">
+                    <!-- Formulario -->
+                    <div class="fade-in">
+                        <div class="card-profesional">
+                            <div class="card-header">
+                                <h5 class="card-title">
+                                    <i class="fas <?php echo $modoEdicion ? 'fa-edit' : 'fa-plus-circle'; ?>"></i>
+                                    <?php echo $modoEdicion ? 'Editar Libro' : 'Agregar Nuevo Libro'; ?>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <?php 
+                                if ($modoEdicion && $libroEditar) {
+                                    echo FormHandler::mostrarFormularioLibro($libroEditar);
+                                } else {
+                                    echo FormHandler::mostrarFormularioLibro();
+                                }
+                                ?>
+                            </div>
                         </div>
-                        <?php endif; ?>
+                    </div>
+
+                    <!-- Catálogo -->
+                    <div class="fade-in">
+                        <div class="card-profesional">
+                            <div class="card-header">
+                                <h5 class="card-title">
+                                    <i class="fas fa-books"></i>
+                                    Catálogo de Libros
+                                    <span class="badge bg-primary"><?php echo $total_libros; ?></span>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <?php if ($total_libros > 0): ?>
+                                <div class="table-responsive">
+                                    <table class="table-profesional">
+                                        <thead>
+                                            <tr>
+                                                <th>Título</th>
+                                                <th>Autor</th>
+                                                <th>Categoría</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php foreach ($biblioteca->getLibros() as $libro): ?>
+                                            <tr>
+                                                <td class="fw-bold"><?php echo $libro->getTitulo(); ?></td>
+                                                <td class="text-secondary"><?php echo $libro->getAutor(); ?></td>
+                                                <td>
+                                                    <span class="badge bg-light text-dark"><?php echo $libro->getCategoria(); ?></span>
+                                                </td>
+                                                <td>
+                                                    <?php if ($libro->getDisponible()): ?>
+                                                        <span class="badge badge-success">
+                                                            <i class="fas fa-check"></i> Disponible
+                                                        </span>
+                                                    <?php else: ?>
+                                                        <span class="badge badge-warning">
+                                                            <i class="fas fa-clock"></i> Prestado
+                                                        </span>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <div class="acciones-tabla">
+                                                        <a href="?editar=<?php echo $libro->getId(); ?>" class="btn btn-outline btn-sm">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <?php if ($libro->getDisponible()): ?>
+                                                            <a href="?prestar=<?php echo $libro->getId(); ?>" class="btn btn-success btn-sm">
+                                                                <i class="fas fa-hand-holding"></i>
+                                                            </a>
+                                                        <?php else: ?>
+                                                            <a href="?devolver=<?php echo $libro->getId(); ?>" class="btn btn-warning btn-sm">
+                                                                <i class="fas fa-undo"></i>
+                                                            </a>
+                                                        <?php endif; ?>
+                                                        <a href="?eliminar=<?php echo $libro->getId(); ?>" class="btn btn-danger btn-sm" 
+                                                           onclick="return confirm('¿Está seguro de eliminar este libro?')">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <?php else: ?>
+                                <div class="estado-vacio">
+                                    <i class="fas fa-book-open"></i>
+                                    <h5>No hay libros en el catálogo</h5>
+                                    <p>Comienza agregando tu primer libro</p>
+                                </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
 
     <!-- Bootstrap JS -->
